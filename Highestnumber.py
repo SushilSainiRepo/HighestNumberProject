@@ -1,6 +1,51 @@
 
-import math as math
-def ArrangeIt(lst):
+from math import * 
+def numLen(num):
+  return len(str(abs(num)))
+def round_down(n, decimals=0):
+    multiplier = 10 ** decimals
+    return floor(n * multiplier) / multiplier
+def ArrangeIT(inputlst):
+    outputList=[]
+    for i in range(len(inputlst)): 
+        ele = inputlst[i]
+        if (i==0):
+            outputList.append(ele)  
+        else:
+            compareele =ele
+            for j in range(len(outputList)):
+                temp= outputList[j]
+                lenOftemp =numLen(temp)
+                lenOfele =numLen(compareele)
+                newtemp =temp/(10**lenOftemp)
+                newele =compareele/(10**lenOfele)
+                if(lenOftemp== lenOfele and compareele> temp ) or (lenOftemp>lenOfele and  newele>=round_down(newtemp,lenOfele)) or (lenOftemp<lenOfele and newtemp < round_down(newele,lenOftemp)):
+                    tempswap = temp
+                    outputList[j]=compareele
+                    compareele= tempswap                 
+            outputList.append(compareele)
+    result= ''
+    for element in outputList:
+        result += str(element)
+    return result
+def main():
+    # creating an empty list 
+    inputlst = [] 
+    # number of elemetns as input 
+    n = int(input("Enter number of elements : ")) 
+    for i in range(0, n): 
+            number = int(input()) 
+            inputlst.append(round(number))
+    # Ans=ArrangeDigits(inputlst)
+    outputlist= ArrangeIT(inputlst)
+    print(outputlist)
+    # print(Ans)
+
+main()
+
+
+
+def ArrangeAllDigits(lst):
     ilst = [] 
     for i in range(len(lst)): 
         number = lst[i] 
@@ -15,16 +60,3 @@ def ArrangeIt(lst):
     for j in range(len(ilst)):
         answer=answer+ilst[j] * 10**j 
     return (round(answer))
-
-def main():
-    # creating an empty list 
-    inputlst = [] 
-    # number of elemetns as input 
-    n = int(input("Enter number of elements : ")) 
-    for i in range(0, n): 
-            number = int(input()) 
-            inputlst.append(round(number))
-    Ans=ArrangeIt(inputlst)
-    print(Ans)
-
-main()
