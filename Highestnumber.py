@@ -1,10 +1,6 @@
 
 from math import * 
-def numLen(num):
-  return len(str(abs(num)))
-def round_down(n, decimals=0):
-    multiplier = 10 ** decimals
-    return floor(n * multiplier) / multiplier
+
 def ArrangeIT(inputlst):
     outputList=[]
     for i in range(len(inputlst)): 
@@ -17,9 +13,9 @@ def ArrangeIT(inputlst):
                 temp= outputList[j]
                 lenOftemp =numLen(temp)
                 lenOfele =numLen(compareele)
-                newtemp =temp/(10**lenOftemp)
-                newele =compareele/(10**lenOfele)
-                if(lenOftemp== lenOfele and compareele> temp ) or (lenOftemp>lenOfele and  newele>=round_down(newtemp,lenOfele)) or (lenOftemp<lenOfele and newtemp < round_down(newele,lenOftemp)):
+                newtemp =int(str(temp)+ str(compareele))
+                newele =int(str(compareele)+ str(temp))
+                if(  newele>=newtemp):
                     tempswap = temp
                     outputList[j]=compareele
                     compareele= tempswap                 
@@ -60,3 +56,9 @@ def ArrangeAllDigits(lst):
     for j in range(len(ilst)):
         answer=answer+ilst[j] * 10**j 
     return (round(answer))
+
+def numLen(num):
+  return len(str(abs(num)))
+def round_down(n, decimals=0):
+    multiplier = 10 ** decimals
+    return floor(n * multiplier) / multiplier
